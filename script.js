@@ -1,6 +1,9 @@
 //set example answer
 const answer = "LUNAR";
-const len = answer.length;
+const length = answer.length;
+let alphabet = "abcdefghijklmnopqrstuvwxyz";
+alphabet += alphabet.toUpperCase();
+
 //print len to user
 
 //wrap in event lisener
@@ -10,11 +13,28 @@ const len = answer.length;
 //return letter in correct index
 //return letter not in correct index but in word
 
-const form = document.querySelector("form");
-form.addEventListener("submit", function () {
-  function getWord(event) {
-    const word = event.target.input.value;
-    console.log(word);
+const button = document.querySelector("button");
+button.addEventListener("click", function () {
+  const userInput = document.querySelector("#textbox");
+  const word = userInput.value;
+
+  if (word.length !== length) {
+    return "Your guess sucks!";
+  }
+
+  for (let i = 0; i < word.length; i++) {
+    let message = "";
+    if (!alphabet.includes(word[i])) {
+      return "Your guess sucks!!";
+    } else if (answer.includes(word[i])) {
+      if (answer[i] === word[i]) {
+        message += `${word[i]} is in the right place`;
+      } else {
+        message += `${word[i]} is in the wrong place`;
+      }
+    }
+    console.log(message)
+    return message;
   }
 });
 
